@@ -1,6 +1,6 @@
 {
   "name": "agent-principles",
-  "description": "Engineering principles as Agent Skills.",
+  "description": "Engineering principles and craft skills as Agent Skills.",
   "owner": {
     "name": "Luke Garceau",
     "url": "https://github.com/lgarceau768"
@@ -10,6 +10,11 @@
       "name": "agent-principles",
       "source": "./",
       "description": "Engineering principles as Agent Skills that load when the work matches their trigger."
+    },
+    {
+      "name": "lstack-skills",
+      "source": "./plugins/lstack-skills",
+      "description": "Craft skills from LStack: test-first work, TypeScript, comment audits, and plain, human prose."
     }
   ]
 }

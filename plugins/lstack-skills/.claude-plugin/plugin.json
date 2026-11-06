@@ -1,0 +1,10 @@
+{
+  "name": "lstack-skills",
+  "version": "1.0.0",
+  "description": "Craft skills from LStack: test-first work, TypeScript, comment audits, and plain, human prose.",
+  "author": { "name": "Luke Garceau", "url": "https://github.com/lgarceau768" },
+  "homepage": "https://github.com/lgarceau768/agent-principles",
+  "repository": "https://github.com/lgarceau768/agent-principles",
+  "license": "MIT",
+  "keywords": ["skills", "tdd", "typescript", "writing", "agent-skills"]
+}
