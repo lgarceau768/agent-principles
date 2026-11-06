@@ -16,6 +16,10 @@
 
 ---
 
+> These are a collection of the skills I've curated, use daily, and find to fit for my workflow best.
+>
+> — [Luke Garceau](https://github.com/lgarceau768)
+
 Each skill is one short, opinionated `SKILL.md` about a class of problem: where
 validation belongs, when a test actually proves anything, what to delete before
 you add something new. They work as a checklist for an agent and as a reminder
