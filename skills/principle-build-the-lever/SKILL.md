@@ -4,6 +4,9 @@ description: "Apply when the work is non-trivial, not only when it is bulk work 
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: verification
+  summary: "Write the codemod or script instead of doing it by hand."
+  when: "The work is more than a couple of obvious edits."
 ---
 
 # Build the Lever

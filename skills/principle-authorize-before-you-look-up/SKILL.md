@@ -2,6 +2,10 @@
 name: principle-authorize-before-you-look-up
 description: "Apply when adding or reviewing any endpoint, handler, or resolver that takes an identifier from a caller. Decide whether the caller is allowed before you fetch the thing they named, or the difference between your 403 and your 404 tells them what exists."
 license: MIT
+metadata:
+  category: reliability
+  summary: "Check permission before the fetch, or 403 vs 404 leaks what exists."
+  when: "An endpoint or handler takes an id from the caller."
 ---
 
 # Authorize Before You Look Up
@@ -25,7 +29,7 @@ would have caught it — "does this method authorize?" — passes.
 ## The pattern
 
 1. **Resolve the caller's identity and scope first.** Whatever the request
-   carries — a role, a tenant, an organization, a facility — read it before
+   carries — a role, a tenant, an organization, a workspace — read it before
    touching storage.
 2. **Decide on what the caller supplied**, not on what the lookup returned.
    Permission that depends on the loaded object is a second, narrower check;

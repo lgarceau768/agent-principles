@@ -4,6 +4,9 @@ description: "Apply when you catch yourself writing the same instruction a secon
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: verification
+  summary: "Turn a repeated instruction into a lint, a check, or a script."
+  when: "You catch yourself giving the same correction twice."
 ---
 
 # Encode Lessons in Structure

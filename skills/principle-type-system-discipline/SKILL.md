@@ -4,6 +4,9 @@ description: "Apply when designing types, reviewing a function signature, or wri
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: design
+  summary: "Use the compiler as a proof assistant and make illegal states impossible to write."
+  when: "Designing types or reviewing a signature in any typed language."
 ---
 
 # Type System Discipline

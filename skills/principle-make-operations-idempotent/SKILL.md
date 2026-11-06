@@ -4,6 +4,9 @@ description: "Apply when designing commands, lifecycle steps, or processing loop
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: reliability
+  summary: "Running it twice, or after a crash, ends in the same state."
+  when: "Designing commands, startup steps, or retry loops."
 ---
 
 # Make Operations Idempotent

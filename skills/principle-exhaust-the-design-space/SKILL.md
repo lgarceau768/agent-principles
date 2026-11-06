@@ -4,6 +4,9 @@ description: "Apply when facing a novel UI interaction or architectural decision
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: design
+  summary: "Prototype two or three real alternatives before you commit."
+  when: "The decision is novel and the codebase has no precedent."
 ---
 
 # Exhaust the Design Space

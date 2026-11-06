@@ -4,6 +4,9 @@ description: "Apply when integrating a new requirement into an existing design. 
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: design
+  summary: "Build it as if the new requirement had been there on day one."
+  when: "A new requirement is about to be bolted onto an old design."
 ---
 
 # Redesign From First Principles

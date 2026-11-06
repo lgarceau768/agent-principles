@@ -4,6 +4,9 @@ description: "Apply when product, UX, or feature-scope tradeoffs come up. Choose
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: design
+  summary: "The product is the experience. Choose delight over convenience."
+  when: "Scope, UX, or polish trade-offs come up."
 ---
 
 # Experience First

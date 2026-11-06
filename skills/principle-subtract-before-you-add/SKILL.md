@@ -4,6 +4,9 @@ description: "Apply when sequencing an addition, refactor, or rewrite. Remove de
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: simplicity
+  summary: "Delete dead weight first, then build on the smaller base."
+  when: "Sequencing an addition, refactor, or rewrite."
 ---
 
 # Subtract Before You Add

@@ -4,6 +4,9 @@ description: "Apply when refactoring, evaluating diff size, or tempted to add ab
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: simplicity
+  summary: "Borrow a tired maintainer's instincts: the least code that solves it."
+  when: "You feel the urge to add a layer, abstraction, or new signal."
 ---
 
 # Laziness Protocol

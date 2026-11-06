@@ -4,6 +4,9 @@ description: "Apply when running a planned rewrite or migration with explicit ph
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: agents
+  summary: "Converge on the target design. No throwaway compatibility shims."
+  when: "Running a planned rewrite or migration in phases."
 ---
 
 # Outcome-Oriented Execution

@@ -4,6 +4,9 @@ description: "Apply when a task is complete and you are about to declare it done
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: verification
+  summary: "Check the real artifact, and show each guard test failing on purpose."
+  when: "You are about to say “done”."
 ---
 # Prove It Works
 

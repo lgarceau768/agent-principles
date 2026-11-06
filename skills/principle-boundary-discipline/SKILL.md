@@ -4,6 +4,9 @@ description: "Apply when wiring validation, error handling, or framework adapter
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: design
+  summary: "Validate at the edges, trust the inside, keep business logic pure."
+  when: "Wiring validation, error handling, or a framework adapter."
 ---
 
 # Boundary Discipline

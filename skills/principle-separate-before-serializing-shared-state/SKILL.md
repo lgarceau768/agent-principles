@@ -4,6 +4,9 @@ description: "Apply when concurrent actors might write to the same file, branch,
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: reliability
+  summary: "Give each writer its own target before reaching for locks."
+  when: "Concurrent actors might write the same file, key, or branch."
 ---
 
 # Separate Before Serializing Shared State

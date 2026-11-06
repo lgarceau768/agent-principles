@@ -4,6 +4,9 @@ description: "Apply when introducing a new internal API while old callers still 
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: simplicity
+  summary: "Move every caller to the new API and delete the old one in the same pass."
+  when: "A new internal API lands while old callers still exist."
 ---
 
 # Migrate Callers Then Delete Legacy APIs

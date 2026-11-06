@@ -4,6 +4,9 @@ description: "Apply when tempted to ask 'should I do X?' on reversible work. Pro
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: agents
+  summary: "Do the reversible thing, show the result, and ask only about the irreversible."
+  when: "You are about to ask “should I do X?”"
 ---
 
 # Never Block on the Human

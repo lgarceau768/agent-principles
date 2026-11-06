@@ -1,95 +1,197 @@
-# agent-principles
+<div align="center">
 
-Engineering principles packaged as [Agent Skills](https://agentskills.io): short,
-opinionated `SKILL.md` files that tell a coding agent how to think about a class
-of problem, such as where validation belongs, when a test proves anything, or what
-to delete before adding something new.
+# 🧭 agent-principles
 
-Each skill's `description` is written as a trigger ("Apply when…"), so the agent
-loads a principle when the work in front of it matches, not all the time. Every
-file uses only the five portable frontmatter fields (`name`, `description`,
-`license`, `compatibility`, `metadata`). Any host that reads the Agent Skills
-format can load them unchanged.
+**Engineering principles your coding agent loads exactly when the work calls for them.**
 
-## Install
+[![lint](https://github.com/lgarceau768/agent-principles/actions/workflows/lint.yml/badge.svg)](https://github.com/lgarceau768/agent-principles/actions/workflows/lint.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-orange)](https://agentskills.io)
+[![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-d97757)](#-install)
+[![Dependencies: none](https://img.shields.io/badge/dependencies-none-brightgreen)](scripts/lint.mjs)
 
-**Claude Code, as a plugin:**
+[Install](#-install) · [The skills](#-the-skills) · [How it works](#%EF%B8%8F-how-it-works) · [Contributing](#-contributing)
+
+</div>
+
+---
+
+Each skill is one short, opinionated `SKILL.md` about a class of problem: where
+validation belongs, when a test actually proves anything, what to delete before
+you add something new. They work as a checklist for an agent and as a reminder
+for a person.
+
+> [!TIP]
+> These skills are not loaded all the time. Each one carries a trigger
+> ("Apply when…"), so the agent loads a principle only when the task in front of
+> it matches. Your context stays small, and the advice arrives when it is relevant.
+
+## 🚀 Install
+
+**Claude Code, as a plugin** (recommended):
 
 ```text
 /plugin marketplace add lgarceau768/agent-principles
 /plugin install agent-principles@agent-principles
 ```
 
-**Claude Code, as personal skills** (no plugin namespace):
+<details>
+<summary><b>Claude Code, as plain skills</b> (no plugin namespace)</summary>
 
 ```bash
 git clone https://github.com/lgarceau768/agent-principles.git
-cp -rf agent-principles/skills/* ~/.claude/skills/
+cp -rf agent-principles/skills/* ~/.claude/skills/      # every project
+# or: cp -rf agent-principles/skills/* .claude/skills/  # this project only
 ```
 
-Use `.claude/skills/` inside a repository to scope them to that project.
+</details>
 
-**Other hosts:** copy the directories under `skills/` into the host's skills
-folder. Keep them together. Several skills link to each other by relative path.
+<details>
+<summary><b>Any other Agent Skills host</b></summary>
 
-## The skills
+Copy the directories under [`skills/`](skills/) into the host's skills folder.
+Each file uses only the five portable frontmatter fields, so it loads unchanged.
+
+Keep the directories together, because several skills link to each other by
+relative path.
+
+</details>
+
+## 📚 The skills
 
 <!-- skills:begin -->
-| Skill | Apply when |
-|---|---|
-| [`principle-authorize-before-you-look-up`](skills/principle-authorize-before-you-look-up/SKILL.md) ¹ | adding or reviewing any endpoint, handler, or resolver that takes an identifier from a caller. Decide whether the caller is allowed before you fetch the thing they named, or the difference between your 403 and your 404 tells them what exists. |
-| [`principle-boundary-discipline`](skills/principle-boundary-discipline/SKILL.md) | wiring validation, error handling, or framework adapters. Concentrate guards at system boundaries (CLI, config, network, external APIs); trust internal types and keep business logic in pure functions. |
-| [`principle-build-the-lever`](skills/principle-build-the-lever/SKILL.md) | the work is non-trivial, not only when it is bulk work — edits, migrations, analyses, checks. Build the tool that does it or proves it (codemod, script, generator, or a skill your subagents follow) instead of working by hand. The tool is the artifact a reviewer can rerun. |
-| [`principle-encode-lessons-in-structure`](skills/principle-encode-lessons-in-structure/SKILL.md) | you catch yourself writing the same instruction a second time, or notice a recurring correction. Encode the rule as a lint, metadata flag, runtime check, or script instead of more text. |
-| [`principle-exhaust-the-design-space`](skills/principle-exhaust-the-design-space/SKILL.md) | facing a novel UI interaction or architectural decision with no precedent in the codebase. Build 2-3 competing prototypes and compare side by side before committing. |
-| [`principle-experience-first`](skills/principle-experience-first/SKILL.md) | product, UX, or feature-scope tradeoffs come up. Choose user delight over implementation convenience; ship fewer polished features over more rough ones. |
-| [`principle-fix-root-causes`](skills/principle-fix-root-causes/SKILL.md) | debugging. Trace each symptom to its root cause and fix it there; reproduce first, ask why until you reach it, resist nil-check guards that silence crashes. |
-| [`principle-foundational-thinking`](skills/principle-foundational-thinking/SKILL.md) | choosing core types and data structures before writing logic, sequencing scaffold-vs-feature work, or asking what concurrent actors share. Get the data structures right so downstream code becomes obvious. |
-| [`principle-guard-the-context-window`](skills/principle-guard-the-context-window/SKILL.md) | context is filling up — large outputs, long files, repeated reads, fan-out planning. Route bulk to subagents; keep summaries in the main thread, not raw payloads. |
-| [`principle-laziness-protocol`](skills/principle-laziness-protocol/SKILL.md) | refactoring, evaluating diff size, or tempted to add abstractions, layers, or signal threading. Bias toward deletion and the smallest change that solves the problem. |
-| [`principle-make-operations-idempotent`](skills/principle-make-operations-idempotent/SKILL.md) | designing commands, lifecycle steps, or processing loops that run amid crashes, restarts, and retries. Converge to the same end state regardless of partial prior runs. |
-| [`principle-migrate-callers-then-delete-legacy-apis`](skills/principle-migrate-callers-then-delete-legacy-apis/SKILL.md) | introducing a new internal API while old callers still exist. Migrate callers and delete the old API in the same wave instead of preserving compatibility layers. |
-| [`principle-minimize-reader-load`](skills/principle-minimize-reader-load/SKILL.md) | reviewing or shaping code that's hard to trace. Count layers between question and answer, and hidden state in the reader's head; collapse one-caller wrappers and shrink mutable scope. |
-| [`principle-model-the-domain`](skills/principle-model-the-domain/SKILL.md) | writing stateful logic, or when code branches a lot or repeats a shape assumption across files. Encode the domain in a structure instead of scattered conditionals. |
-| [`principle-never-block-on-the-human`](skills/principle-never-block-on-the-human/SKILL.md) | tempted to ask 'should I do X?' on reversible work. Proceed, present the result, let the human course-correct after the fact; reserve confirmation for irreversible actions. |
-| [`principle-outcome-oriented-execution`](skills/principle-outcome-oriented-execution/SKILL.md) | running a planned rewrite or migration with explicit phase boundaries. Converge on the target architecture; don't preserve smooth intermediate states with throwaway compatibility code. |
-| [`principle-prove-it-works`](skills/principle-prove-it-works/SKILL.md) | a task is complete and you are about to declare it done. Verify against the real artifact (run the feature, read the actual value, inspect the diff), not a proxy, self-report, or 'it compiles.' |
-| [`principle-redesign-from-first-principles`](skills/principle-redesign-from-first-principles/SKILL.md) | integrating a new requirement into an existing design. Redesign as if the requirement had been a foundational assumption from day one, instead of bolting it on. |
-| [`principle-separate-before-serializing-shared-state`](skills/principle-separate-before-serializing-shared-state/SKILL.md) | concurrent actors might write to the same file, branch, key, or state object. Eliminate the sharing first; serialize structurally only when one shared writer is a real invariant. |
-| [`principle-sequence-verifiable-units`](skills/principle-sequence-verifiable-units/SKILL.md) | doing multi-step work (sweeps, migrations, runs of similar edits) and when stacking commits and PRs. Break work into small units that each end in a verifiable state, check each before the next, and order delivery so the sequence proves itself to a reviewer. |
-| [`principle-subtract-before-you-add`](skills/principle-subtract-before-you-add/SKILL.md) | sequencing an addition, refactor, or rewrite. Remove dead weight, redundant validators, and stub references first, then build on the simpler base. |
-| [`principle-type-system-discipline`](skills/principle-type-system-discipline/SKILL.md) | designing types, reviewing a function signature, or writing code in any statically-typed language. Make illegal states unrepresentable, brand semantic primitives, parse external data at boundaries, refuse to lie to the compiler, exhaust variants, derive from authoritative schemas. |
+<p>
+  <img alt="skills" src="https://img.shields.io/badge/skills-22-6f42c1">
+  <img alt="derived from pstack" src="https://img.shields.io/badge/derived%20from-pstack%200.14.4-555">
+  <img alt="original" src="https://img.shields.io/badge/original-1-2ea44f">
+</p>
+
+| | Group | What it's about |
+|---|---|---|
+| 🧱 | [Design and structure](#-design-and-structure) | Shape the code before you write it. |
+| ✂️ | [Simplicity](#%EF%B8%8F-simplicity) | Less code, fewer layers, smaller diffs. |
+| ✅ | [Verification](#-verification) | Know it works, and leave proof a reviewer can rerun. |
+| 🛡️ | [Reliability and security](#%EF%B8%8F-reliability-and-security) | Behave correctly under retries, races, and hostile callers. |
+| 🤖 | [Working as an agent](#-working-as-an-agent) | Spend context and the human's attention carefully. |
+
+### 🧱 Design and structure
+
+> Shape the code before you write it.
+
+| Principle | The idea | Reach for it when… |
+|---|---|---|
+| **[Boundary discipline](skills/principle-boundary-discipline/SKILL.md)** | Validate at the edges, trust the inside, keep business logic pure. | Wiring validation, error handling, or a framework adapter. |
+| **[Exhaust the design space](skills/principle-exhaust-the-design-space/SKILL.md)** | Prototype two or three real alternatives before you commit. | The decision is novel and the codebase has no precedent. |
+| **[Experience first](skills/principle-experience-first/SKILL.md)** | The product is the experience. Choose delight over convenience. | Scope, UX, or polish trade-offs come up. |
+| **[Foundational thinking](skills/principle-foundational-thinking/SKILL.md)** | Get the data structures right first and the code that follows becomes obvious. | Choosing core types, or deciding what to scaffold before features. |
+| **[Model the domain](skills/principle-model-the-domain/SKILL.md)** | Put the domain in a data structure, not in a pile of if/else. | A feature adds one more branch or one more boolean to keep in sync. |
+| **[Redesign from first principles](skills/principle-redesign-from-first-principles/SKILL.md)** | Build it as if the new requirement had been there on day one. | A new requirement is about to be bolted onto an old design. |
+| **[Type system discipline](skills/principle-type-system-discipline/SKILL.md)** | Use the compiler as a proof assistant and make illegal states impossible to write. | Designing types or reviewing a signature in any typed language. |
+
+### ✂️ Simplicity
+
+> Less code, fewer layers, smaller diffs.
+
+| Principle | The idea | Reach for it when… |
+|---|---|---|
+| **[Laziness protocol](skills/principle-laziness-protocol/SKILL.md)** | Borrow a tired maintainer's instincts: the least code that solves it. | You feel the urge to add a layer, abstraction, or new signal. |
+| **[Migrate callers then delete legacy apis](skills/principle-migrate-callers-then-delete-legacy-apis/SKILL.md)** | Move every caller to the new API and delete the old one in the same pass. | A new internal API lands while old callers still exist. |
+| **[Minimize reader load](skills/principle-minimize-reader-load/SKILL.md)** | Count the layers to trace and the state to hold, then shrink both. | Code is hard to follow, or you are about to add indirection. |
+| **[Subtract before you add](skills/principle-subtract-before-you-add/SKILL.md)** | Delete dead weight first, then build on the smaller base. | Sequencing an addition, refactor, or rewrite. |
+
+### ✅ Verification
+
+> Know it works, and leave proof a reviewer can rerun.
+
+| Principle | The idea | Reach for it when… |
+|---|---|---|
+| **[Build the lever](skills/principle-build-the-lever/SKILL.md)** | Write the codemod or script instead of doing it by hand. | The work is more than a couple of obvious edits. |
+| **[Encode lessons in structure](skills/principle-encode-lessons-in-structure/SKILL.md)** | Turn a repeated instruction into a lint, a check, or a script. | You catch yourself giving the same correction twice. |
+| **[Fix root causes](skills/principle-fix-root-causes/SKILL.md)** | Reproduce, ask why until you reach the cause, and fix it there. | Debugging, especially when a nil check would make it go away. |
+| **[Prove it works](skills/principle-prove-it-works/SKILL.md)** | Check the real artifact, and show each guard test failing on purpose. | You are about to say “done”. |
+| **[Sequence verifiable units](skills/principle-sequence-verifiable-units/SKILL.md)** | Small steps that each end green, ordered so the history proves itself. | Running a sweep or migration, or stacking commits and PRs. |
+
+### 🛡️ Reliability and security
+
+> Behave correctly under retries, races, and hostile callers.
+
+| Principle | The idea | Reach for it when… |
+|---|---|---|
+| **[Authorize before you look up](skills/principle-authorize-before-you-look-up/SKILL.md)** 🆕 | Check permission before the fetch, or 403 vs 404 leaks what exists. | An endpoint or handler takes an id from the caller. |
+| **[Make operations idempotent](skills/principle-make-operations-idempotent/SKILL.md)** | Running it twice, or after a crash, ends in the same state. | Designing commands, startup steps, or retry loops. |
+| **[Separate before serializing shared state](skills/principle-separate-before-serializing-shared-state/SKILL.md)** | Give each writer its own target before reaching for locks. | Concurrent actors might write the same file, key, or branch. |
+
+### 🤖 Working as an agent
+
+> Spend context and the human's attention carefully.
+
+| Principle | The idea | Reach for it when… |
+|---|---|---|
+| **[Guard the context window](skills/principle-guard-the-context-window/SKILL.md)** | Every token has to earn its place. Send bulk output to subagents. | Large files, long outputs, or wide fan-out fill the context. |
+| **[Never block on the human](skills/principle-never-block-on-the-human/SKILL.md)** | Do the reversible thing, show the result, and ask only about the irreversible. | You are about to ask “should I do X?” |
+| **[Outcome oriented execution](skills/principle-outcome-oriented-execution/SKILL.md)** | Converge on the target design. No throwaway compatibility shims. | Running a planned rewrite or migration in phases. |
 <!-- skills:end -->
 
-¹ Original to this repository. Every other skill is derived from pstack; see
-[Provenance](#provenance).
+🆕 Original to this repository. Every other skill is derived from pstack (see
+[Provenance](#-provenance)).
 
-## Provenance
+## ⚙️ How it works
+
+```mermaid
+flowchart LR
+    T["Task in front of the agent"] --> M{"Matches a skill's<br/>'Apply when…' trigger?"}
+    M -- no --> W["Work as usual"]
+    M -- yes --> L["Load that SKILL.md"]
+    L --> A["Apply the principle,<br/>then run its test"]
+```
+
+Every skill uses the same small shape:
+
+```yaml
+---
+name: principle-prove-it-works
+description: "Apply when a task is complete and you are about to declare it done. …"
+license: MIT
+metadata:
+  derived-from: pstack@0.14.4   # present only on derived skills
+  category: verification        # the README group
+  summary: "…"                  # "The idea" column above
+  when: "…"                     # "Reach for it when…" column above
+---
+```
+
+The `description` is what the agent reads to decide whether to load the skill.
+The `metadata` lines are for people: they generate the tables above.
+
+## 🔖 Provenance
 
 These skills were extracted from a larger private agent stack, where they are
 the principle layer that its roles and workflows load by name. This repository
 publishes only that layer, with references to the rest of the stack removed.
 
-Twenty-one of the skills are derived from
-[pstack](https://github.com/cursor/plugins/tree/main/pstack) v0.14.4 by Lauren
-Tan, under the MIT licence. Each derived skill says so in its own frontmatter
-(`metadata.derived-from: pstack@0.14.4`), so the attribution travels with the
-file wherever it is installed. [NOTICE.md](NOTICE.md) has the details and
-pstack's licence text.
+Most are derived from [pstack](https://github.com/cursor/plugins/tree/main/pstack)
+v0.14.4 by Lauren Tan (MIT), and several have been extended since. Each derived
+skill names its source in its own frontmatter, so the attribution travels with
+the file. [NOTICE.md](NOTICE.md) has the full notice.
 
-## Contributing
+## 🤝 Contributing
 
 ```bash
-node scripts/lint.mjs          # check every skill and the table above
-node scripts/lint.mjs --write  # regenerate the table after adding a skill
+node scripts/lint.mjs          # check every skill, and that this README is current
+node scripts/lint.mjs --write  # regenerate the skill tables after a change
 ```
 
-The lint rejects any frontmatter field outside the portable five, a `name` that
-does not match its directory, a description that does not start with "Apply
-when" or "Use when", and a relative link that does not resolve. CI runs it on
-every push and pull request.
+| The lint enforces | Why |
+|---|---|
+| Only `name`, `description`, `license`, `compatibility`, `metadata` | Hosts silently drop fields they don't know |
+| `name` matches its directory | Hosts resolve skills by name |
+| `description` starts "Apply when" or "Use when" | It is a trigger, not a summary |
+| `metadata.category`, `summary` and `when` are set and short | They generate the tables above |
+| Every relative link resolves | Skills point at each other |
 
-## Licence
+CI runs the same check on every push and pull request.
 
-[MIT](LICENSE). Derived material also carries pstack's MIT notice; see
+## 📄 Licence
+
+[MIT](LICENSE). The derived material also carries pstack's MIT notice, in
 [NOTICE.md](NOTICE.md).

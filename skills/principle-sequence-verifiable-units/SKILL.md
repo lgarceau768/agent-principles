@@ -4,6 +4,9 @@ description: "Apply when doing multi-step work (sweeps, migrations, runs of simi
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: verification
+  summary: "Small steps that each end green, ordered so the history proves itself."
+  when: "Running a sweep or migration, or stacking commits and PRs."
 ---
 
 # Sequence work into verifiable units

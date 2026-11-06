@@ -4,6 +4,9 @@ description: "Apply when context is filling up — large outputs, long files, re
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: agents
+  summary: "Every token has to earn its place. Send bulk output to subagents."
+  when: "Large files, long outputs, or wide fan-out fill the context."
 ---
 
 # Guard the Context Window

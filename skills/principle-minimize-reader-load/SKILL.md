@@ -4,6 +4,9 @@ description: "Apply when reviewing or shaping code that's hard to trace. Count l
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: simplicity
+  summary: "Count the layers to trace and the state to hold, then shrink both."
+  when: "Code is hard to follow, or you are about to add indirection."
 ---
 
 # Minimize Reader Load

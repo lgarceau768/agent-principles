@@ -4,6 +4,9 @@ description: "Apply when writing stateful logic, or when code branches a lot or 
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: design
+  summary: "Put the domain in a data structure, not in a pile of if/else."
+  when: "A feature adds one more branch or one more boolean to keep in sync."
 ---
 
 # Model the Domain

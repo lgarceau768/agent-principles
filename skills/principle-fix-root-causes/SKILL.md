@@ -4,6 +4,9 @@ description: "Apply when debugging. Trace each symptom to its root cause and fix
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: verification
+  summary: "Reproduce, ask why until you reach the cause, and fix it there."
+  when: "Debugging, especially when a nil check would make it go away."
 ---
 
 # Fix Root Causes

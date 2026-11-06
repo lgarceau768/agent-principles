@@ -4,6 +4,9 @@ description: "Apply when choosing core types and data structures before writing 
 license: MIT
 metadata:
   derived-from: pstack@0.14.4
+  category: design
+  summary: "Get the data structures right first and the code that follows becomes obvious."
+  when: "Choosing core types, or deciding what to scaffold before features."
 ---
 
 # Foundational Thinking
