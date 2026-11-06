@@ -1,0 +1,10 @@
+{
+  "name": "agent-principles",
+  "version": "1.0.0",
+  "description": "Engineering principles as Agent Skills: boundary discipline, proving it works, subtracting before adding, and more. Each loads when the work matches its trigger.",
+  "author": { "name": "Luke Garceau", "url": "https://github.com/lgarceau768" },
+  "homepage": "https://github.com/lgarceau768/agent-principles",
+  "repository": "https://github.com/lgarceau768/agent-principles",
+  "license": "MIT",
+  "keywords": ["skills", "principles", "engineering", "agent-skills"]
+}

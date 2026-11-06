@@ -1,0 +1,15 @@
+{
+  "name": "agent-principles",
+  "description": "Engineering principles as Agent Skills.",
+  "owner": {
+    "name": "Luke Garceau",
+    "url": "https://github.com/lgarceau768"
+  },
+  "plugins": [
+    {
+      "name": "agent-principles",
+      "source": "./",
+      "description": "Engineering principles as Agent Skills that load when the work matches their trigger."
+    }
+  ]
+}
